@@ -1,0 +1,74 @@
+#root{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav{
+    width: 100%;
+}
+
+ul{
+    display: flex;
+    list-style-type: none;
+    justify-content: space-evenly;
+    background-color: lightblue;
+    color: grey;
+}
+.show{
+    display: block;
+    width: 50%;
+
+}
+
+.hide{
+    display: none;
+}
+
+.flexshow{
+    display: flex;
+}
+
+li:hover{
+    background-color: blue;
+    cursor: pointer;
+    color: white;
+}
+
+.cards_container{
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 5%;
+    row-gap: 5%;
+}
+
+
+.prdCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-style: solid;
+    background-color: grey;
+    align-items: center;
+    text-align: center;
+}
+
+.prdCard button{
+    width: 75%;
+}
+
+
+.counter{
+    width: 33%;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+}
+
+.total{
+    display: block;
+}
+

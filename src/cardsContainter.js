@@ -1,11 +1,7 @@
-import React from "react";
-import NavBar from "./navBar.js"
-import CardsContainter from "./cardsContainter.js";
-import Total from "./Total.js";
-import './navBar.css';
+import React, { Component } from 'react'
+import Card from './card'
 
-
-class App extends React.Component{
+export default class CardsContainter extends Component {
     constructor(props){
         super(props)
         this.cardsContent = [{
@@ -109,38 +105,27 @@ class App extends React.Component{
             buttonText : "Add To Cart",
         },
         ]
-        this.state={
-            total:0,
-        }
+ 
     }
 
-    handleTotalSum = () =>{
-        this.setState({
-            total:this.state.total +1
-        })
-    }
 
-    handleTotalSub = () =>{
-        if(this.state.total)
-        this.setState({
-            total:this.state.total -1
-        })
-    }
 
-    render(){
-        return(
-            <>
-            <NavBar className = 'navUl' lisY = {['Home', 'Contact Us', 'About Us']} />
-            <Total
-             totCount={this.state.total}
-              className="total"/>
-            <CardsContainter
-             totalCh2={this.handleTotalSum}
-             totalCh1={this.handleTotalSub}
-              conClassName = 'cards_container' />
-            </>
+
+
+    render() {
+       
+        this.Cards = this.cardsContent.map((obj, indx) =>
+         <Card 
+         key={indx} 
+         {...obj} 
+         totalCh1={this.props.totalCh1} 
+         totalCh2={this.props.totalCh2}
+         />)
+
+        return (
+            <div className = {this.props.conClassName}>
+                {this.Cards}
+            </div>
         )
     }
 }
-
-export default App;
