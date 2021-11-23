@@ -72,3 +72,11 @@ li:hover{
     display: block;
 }
 
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-radius: 1rem;
+    background-color: lightgrey;
+}
+

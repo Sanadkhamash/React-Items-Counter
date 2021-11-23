@@ -2,8 +2,14 @@ import React from "react";
 import NavBar from "./navBar.js"
 import CardsContainter from "./cardsContainter.js";
 import Total from "./Total.js";
+import Login1  from "./login.js";
 import './navBar.css';
-
+import {Routes as Switch, Route} from "react-router-dom"
+import Home from "./home.js";
+import Student from "./student.js";
+import Teacher from "./teacher.js";
+import Admin from "./admin.js";
+import { Redirect } from "react-router-dom";
 
 class App extends React.Component{
     constructor(props){
@@ -111,7 +117,41 @@ class App extends React.Component{
         ]
         this.state={
             total:0,
+            username:"",
+            password:"",
+            role:"",
+            loggedin:false,
         }
+    }
+    handleSubmit = (e) =>{
+        e.preventDefault()
+        let correctIndex;
+        let userStorage = JSON.parse(localStorage.getItem("user"));
+
+        userStorage.forEach((element,indx) => {
+            if(this.state.username == element.name){
+            correctIndex = indx;
+            }
+        });
+        if(correctIndex == null){
+            alert("not Found")
+        }
+        if(correctIndex != null  && this.state.password===userStorage[correctIndex].password) {
+            this.setState({
+                loggedin:true,
+                role:userStorage[correctIndex].role,
+            })
+        }          
+    }
+
+    handleChange = (e) =>{
+        if(e.target.name == "name"){
+            this.setState({username:e.target.value});
+        }
+        else if (e.target.name == "password"){
+            this.setState({password:e.target.value});
+
+    }
     }
 
     handleTotalSum = () =>{
@@ -128,19 +168,17 @@ class App extends React.Component{
     }
 
     render(){
-        return(
-            <>
-            <NavBar className = 'navUl' lisY = {['Home', 'Contact Us', 'About Us']} />
-            <Total
-             totCount={this.state.total}
-              className="total"/>
-            <CardsContainter
-             totalCh2={this.handleTotalSum}
-             totalCh1={this.handleTotalSub}
-              conClassName = 'cards_container' />
-            </>
-        )
+        switch (this.state.role) {
+            case "Admin" : return <Admin />;
+            case "Teacher" : return <Teacher />;
+            case "Student" : return <Student />;
+
+            default: return <Home handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>;
+
+        }
+ 
     }
 }
+
 
 export default App;
