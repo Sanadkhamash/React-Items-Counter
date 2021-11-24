@@ -72,11 +72,24 @@ li:hover{
     display: block;
 }
 
+.loginPage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+
+}
+
 .loginForm{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     border-style: solid;
     border-radius: 1rem;
     background-color: lightgrey;
+    width: 35%;
+    height: 35vh;
 }
 

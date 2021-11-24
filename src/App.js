@@ -1,15 +1,27 @@
 import React from "react";
-import NavBar from "./navBar.js"
-import CardsContainter from "./cardsContainter.js";
-import Total from "./Total.js";
-import Login1  from "./login.js";
-import './navBar.css';
 import {Routes as Switch, Route} from "react-router-dom"
-import Home from "./home.js";
-import Student from "./student.js";
-import Teacher from "./teacher.js";
-import Admin from "./admin.js";
 import { Redirect } from "react-router-dom";
+
+//===================Component =================//
+
+import NavBar from "./components/navBar.js"
+import CardsContainter from "./components/cardsContainter.js";
+import Total from "./components/Total.js";
+
+//===================Pages =====================//
+
+import Admin from "./pages/admin.js";
+import Login from "./pages/login.js";
+import Register  from "./pages/registration.js";
+import Student from "./pages/student.js";
+import Teacher from "./pages/teacher.js";
+
+//================== Styling ================//
+
+import './navBar.css';
+
+
+
 
 class App extends React.Component{
     constructor(props){
@@ -173,7 +185,7 @@ class App extends React.Component{
             case "Teacher" : return <Teacher />;
             case "Student" : return <Student />;
 
-            default: return <Home handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>;
+            default: return <Login handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>;
 
         }
  
