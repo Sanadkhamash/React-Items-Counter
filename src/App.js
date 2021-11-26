@@ -1,20 +1,19 @@
 import React from "react";
 import {Routes as Switch, Route} from "react-router-dom"
-import { Redirect } from "react-router-dom";
+import UsersContainer from "./pages/usersContainer.js";
+import HomeUser from "./pages/homeUser.js";
+import NavBarUser from "./components/navBarUser.js";
+import NavBar from './components/navBar'
 
-//===================Component =================//
 
-import NavBar from "./components/navBar.js"
-import CardsContainter from "./components/cardsContainter.js";
-import Total from "./components/Total.js";
+
 
 //===================Pages =====================//
 
 import Admin from "./pages/admin.js";
 import Login from "./pages/login.js";
 import Register  from "./pages/registration.js";
-import Student from "./pages/student.js";
-import Teacher from "./pages/teacher.js";
+import User from "./pages/user.js";
 
 //================== Styling ================//
 
@@ -128,11 +127,11 @@ class App extends React.Component{
         },
         ]
         this.state={
-            total:0,
-            username:"",
+            mail:"",
             password:"",
             role:"",
             loggedin:false,
+            loggedInName:""
         }
     }
     handleSubmit = (e) =>{
@@ -141,7 +140,7 @@ class App extends React.Component{
         let userStorage = JSON.parse(localStorage.getItem("user"));
 
         userStorage.forEach((element,indx) => {
-            if(this.state.username == element.name){
+            if(this.state.mail == element.mail){
             correctIndex = indx;
             }
         });
@@ -152,13 +151,14 @@ class App extends React.Component{
             this.setState({
                 loggedin:true,
                 role:userStorage[correctIndex].role,
+                loggedInName:userStorage[correctIndex].name
             })
         }          
     }
 
     handleChange = (e) =>{
         if(e.target.name == "name"){
-            this.setState({username:e.target.value});
+            this.setState({mail:e.target.value});
         }
         else if (e.target.name == "password"){
             this.setState({password:e.target.value});
@@ -166,26 +166,36 @@ class App extends React.Component{
     }
     }
 
-    handleTotalSum = () =>{
-        this.setState({
-            total:this.state.total +1
-        })
-    }
-
-    handleTotalSub = () =>{
-        if(this.state.total)
-        this.setState({
-            total:this.state.total -1
-        })
-    }
-
     render(){
         switch (this.state.role) {
-            case "Admin" : return <Admin />;
-            case "Teacher" : return <Teacher />;
-            case "Student" : return <Student />;
+            case "Admin" : return (
+                <>
+                    <NavBar role={this.state.role}/>
+                    <Switch>
+                        <Route path="/" element={<Admin showDelete={true} />}/>;
+                        <Route path="/users" element={<UsersContainer/>}/>;
 
-            default: return <Login handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>;
+                    </Switch>
+                </>
+                
+            )
+            case "user" : return(   
+                <>
+                    <NavBarUser/>
+                    <Switch>
+                        <Route path="/" element={<HomeUser />}/>
+                        <Route path="/posts" element={<User role={this.state.role} userCommented = {this.state.loggedInName} />}/>
+                    </Switch>
+                </>
+            )
+
+
+            default: return (
+                <Switch>
+                    <Route exact path="/"  element={<Login handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>}/>
+                    <Route exact path="/register" element={<Register/>} />
+                </Switch>
+            )
 
         }
  
@@ -194,3 +204,4 @@ class App extends React.Component{
 
 
 export default App;
+

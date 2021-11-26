@@ -2,38 +2,32 @@ import React from "react";
 import {Link} from "react-router-dom"
 
 class Login extends React.Component{
-    constructor(props){
-        super(props)
-        this.state={
-
-        }
-    }
-
-
-
-
-
 
     render(){
         return(
             <div className="loginPage">
                 <form className="loginForm" onSubmit={this.props.handleSubmit}>
+                    <h3>Login</h3>
+                    <h5>Enter your username and password</h5>
                     <label>
-                    Username:
-                    <input type="text" name="name" onChange={this.props.handleChange}/>
+                    <p>Email Address:</p>
+                    <input required type="text" name="name" onChange={this.props.handleChange}/>
                     </label>
                         <br/>
                     <label>
-                    Password:
-                    <input type="password" name="password" onChange={this.props.handleChange}/>
+                    <p>Enter Password:</p>
+                    <input required type="password" name="password" onChange={this.props.handleChange}/>
                     </label>
                     <br/>
                     <input type="submit" value="Login" />
                     <Link to="/register">
-                        Don't have an account? Login here!
+                        Don't have an account? Signup here!
                     </Link>
                 </form>
+                
             </div>
+
+
         );
 
     }

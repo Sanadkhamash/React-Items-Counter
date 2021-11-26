@@ -1,17 +1,19 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom'
 
 class NavBar extends React.Component{
-    constructor(props){
-        super(props)
-        this.navList=this.props.lisY.map((item, ley) => <li key={ley}>{item}</li>)
-    }
+
 
     render(){
         return(
             <nav>
-                <ul className={this.props.className}>
-                    {this.navList}
-                </ul>
+                
+                    <ul className={this.props.className}>
+                        <NavLink className="navLink"  to="/">Posts</NavLink>
+                        <NavLink className="navLink" to="/users">Users</NavLink>
+                    </ul>
+
+
             </nav>
         )
     }
