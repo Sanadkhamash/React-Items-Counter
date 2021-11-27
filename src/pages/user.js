@@ -46,15 +46,3 @@ export default class User extends Component {
         )
     }
 }
-
-// {
-//     className: "prdCard",
-//     className5: "flexShow", 
-//     className1: "prdtHead",
-//     name: "sanad",
-//     comments:[
-//         {
-//             user:
-//         }
-//     ]   
-// }

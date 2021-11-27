@@ -36,8 +36,7 @@ class Register extends React.Component {
         }
     }
   
-    handleSubmit(event) {
-        event.preventDefault();
+    handleSubmit() {
         let correctIndex;
         let userStorage = JSON.parse(localStorage.getItem("user"));
 
@@ -56,7 +55,8 @@ class Register extends React.Component {
             }            
             let userStorage = JSON.parse(localStorage.getItem("user"))
             userStorage.push(user);
-            localStorage.setItem("user",JSON.stringify(userStorage))
+            localStorage.setItem("user",JSON.stringify(userStorage));
+            alert("Accout Created Successfuly, Please LogIn")
         }
 
         else{
@@ -85,7 +85,7 @@ class Register extends React.Component {
               <p>Password:</p>
               <input required type="password" name="password" value={this.state.value} onChange={this.handleChange} />
             </label> 
-            <input type="submit" value="Sign Up" />
+            <input type="submit" value="Create Account"/>
             <Link to="/">
                Already Have an account? Sign in here!
             </Link>

@@ -20,6 +20,10 @@ nav ul{
     color: goldenrod;
 }
 
+.logOutBtn{
+    cursor: pointer;
+}
+
 
 li:hover{
     background-color: blue;
@@ -59,6 +63,10 @@ li:hover{
     width: 100%;
 }
 
+.likeBtn{
+    cursor: pointer;
+}
+
 .prevComments{
     display: flex;
     width: 75%;
@@ -92,7 +100,10 @@ li:hover{
 }
 
 .userName1{
-    
+    border-style: solid;
+    border-radius: 0.5rem;
+    color: rgb(111, 111, 202);
+    font-weight: 800;
 }
 .cmntBtn{
     width:50%;
@@ -223,4 +234,12 @@ li:hover{
     font-size: 120%;
 }
 
+.userCard{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    background-color: gray;
+    border-style: solid;
+    text-align: left;
+}
 

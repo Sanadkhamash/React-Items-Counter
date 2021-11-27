@@ -14,6 +14,7 @@ export default class AddField extends Component {
             src:e.target.image.value,
             alt:e.target.alt.value,
             comments:[],
+            likes:[],
             className : "prdCard", 
             className5 : "flexShow",
             className1:"prdtHead", 

@@ -11,6 +11,7 @@ class NavBar extends React.Component{
                     <ul className={this.props.className}>
                         <NavLink className="navLink"  to="/">Posts</NavLink>
                         <NavLink className="navLink" to="/users">Users</NavLink>
+                        <NavLink to={"/"} className='logOutBtn' onClick={this.props.handleLogout}>Logout</NavLink>
                     </ul>
 
 

@@ -14,6 +14,7 @@ import Admin from "./pages/admin.js";
 import Login from "./pages/login.js";
 import Register  from "./pages/registration.js";
 import User from "./pages/user.js";
+import NotFound from "./pages/notFound.js";
 
 //================== Styling ================//
 
@@ -131,10 +132,14 @@ class App extends React.Component{
             password:"",
             role:"",
             loggedin:false,
-            loggedInName:""
+            loggedInName:"",
+            isLoggedIn:JSON.parse(localStorage.getItem("isLoggedIn")),
         }
     }
-    handleSubmit = (e) =>{
+
+
+
+    handleSubmit =  async (e) =>{
         e.preventDefault()
         let correctIndex;
         let userStorage = JSON.parse(localStorage.getItem("user"));
@@ -148,11 +153,14 @@ class App extends React.Component{
             alert("not Found")
         }
         if(correctIndex != null  && this.state.password===userStorage[correctIndex].password) {
-            this.setState({
+            await this.setState({
                 loggedin:true,
                 role:userStorage[correctIndex].role,
-                loggedInName:userStorage[correctIndex].name
+                loggedInName:userStorage[correctIndex].name,
             })
+           this.setState({ isLoggedIn: [this.state.loggedInName,this.state.role]})
+            localStorage.setItem("isLoggedIn",JSON.stringify([this.state.loggedInName,this.state.role]));
+
         }          
     }
 
@@ -166,41 +174,49 @@ class App extends React.Component{
     }
     }
 
+    handleLogout=()=>{
+        localStorage.setItem("isLoggedIn",JSON.stringify([0,0]))
+        this.setState({
+            isLoggedIn:[0,0],
+        })
+    }
+
     render(){
-        switch (this.state.role) {
+        switch (this.state.isLoggedIn[1]) {
             case "Admin" : return (
                 <>
-                    <NavBar role={this.state.role}/>
+                    <NavBar handleLogout={this.handleLogout} role={this.state.role}/>
                     <Switch>
                         <Route path="/" element={<Admin showDelete={true} />}/>;
                         <Route path="/users" element={<UsersContainer/>}/>;
+                        <Route path="*" element={<NotFound />}/>
 
                     </Switch>
                 </>
-                
             )
             case "user" : return(   
                 <>
-                    <NavBarUser/>
+                    <NavBarUser handleLogout={this.handleLogout}/>
                     <Switch>
                         <Route path="/" element={<HomeUser />}/>
                         <Route path="/posts" element={<User role={this.state.role} userCommented = {this.state.loggedInName} />}/>
+                        <Route path="*" element={<NotFound />}/>
                     </Switch>
                 </>
             )
-
-
+            
+            
             default: return (
                 <Switch>
                     <Route exact path="/"  element={<Login handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>}/>
                     <Route exact path="/register" element={<Register/>} />
+                    <Route path="*" element={<NotFound />}/>
                 </Switch>
             )
 
         }
- 
     }
-}
+        }
 
 
 export default App;

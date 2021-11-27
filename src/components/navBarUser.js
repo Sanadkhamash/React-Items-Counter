@@ -9,6 +9,8 @@ export default class NavBarUser extends Component {
                     <NavLink className="navLink" to="/">Home</NavLink>
                     <NavLink className="navLink" to="/posts">Posts</NavLink>
                     <NavLink className="navLink" to="/contact">Contact Us</NavLink>
+                    <NavLink to={"/"} className='logOutBtn' onClick={this.props.handleLogout}>Logout</NavLink>
+
                 </ul>
             </nav>
         )
