@@ -35,7 +35,7 @@ export default class Admin extends Component {
                     showDelete={true}
                     deleteCard={this.deleteCard}
                     cards={this.state.cards}
-                    conClassName="cards_container"
+                    conClassName="cards_container hhhh"
                 />
             </>
         )
